@@ -7,25 +7,27 @@
 
 import UIKit
 
-class ViewControllerFour: UIViewController
-, UITableViewDelegate ,
-UITableViewDataSource
+class ViewControllerFour: UIViewController ,
+UITableViewDelegate  , UITableViewDataSource
+
+
 
 {
    
     
    
     @IBOutlet weak var Profile_view: UIView!
-    @IBOutlet weak var CollectionView: UITableView!
-    
+    @IBOutlet weak var TableView1: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let nib = UINib(nibName: "DemoTableViewCell", bundle: nil)
-//        CollectionView.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
-        CollectionView.delegate = self
-        CollectionView.dataSource = self
+//        let nib = UINib(nibName: "Demo TableViewCell", bundle: nil)
+//        TableView1.register(nib, forCellReuseIdentifier: "DemoTableViewCell")
+//        TableView1.delegate = self
+//        TableView1.dataSource = self
         self.Profile_view.layer.cornerRadius =  Profile_view.frame.width/2
+        
+        
     }
     
     
@@ -35,7 +37,7 @@ UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let Cell = CollectionView.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DomeTableViewCell
+        let Cell = TableView1.dequeueReusableCell(withIdentifier: "DemoTableViewCell", for: indexPath) as! DomeTableViewCell
         
         return Cell
    
