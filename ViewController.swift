@@ -10,22 +10,15 @@ import UIKit
 class ViewController: UIViewController  , UICollectionViewDelegate , UICollectionViewDataSource
 , UICollectionViewDelegateFlowLayout
 
-    {
-
+{
+    
     @IBOutlet weak var CollectionView: UICollectionView!
     @IBOutlet weak var PageView: UIPageControl!
     @IBOutlet weak var CollectionButton: UICollectionView!
-        private var myButtonsArray = ["All", "Concert", "Pub&restaurant", "Meeting" , "Bar" , "test"]
-        
-        
-        
+    private var myButtonsArray = ["All", "Concert", "Pub&restaurant", "Meeting" , "Bar" , "test"]
     var imgArray =  [UIImage(named: "forest3"),UIImage(named: "forest2"),UIImage(named: "forest1")]
     var timer = Timer()
     var counter = 0
-        
-        
-        
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,43 +29,9 @@ class ViewController: UIViewController  , UICollectionViewDelegate , UICollectio
         PageView.numberOfPages = imgArray.count
         PageView.currentPage = 0
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(changerImage), userInfo: nil, repeats: true)
-        
-      
-//
-//        for index in 0...5 {
-//            myButtonsArray[index]
-//               }
-//        for (index,element) in myButtonsArray.enumerated() {
-//            let oneBtn : UIButton = {
-//            let button = UIButton()
-//                button.setTitle(element, for: .normal)
-//              //  button.backgroundColor = UIColor.gray
-//             //   button.layer.borderColor = UIColor.yellow.cgColor
-//                button.layer.borderWidth = 1
-//              //  button.setTitleColor(UIColor.yellow, for: .normal)
-//                button.contentHorizontalAlignment = .center
-//                button.contentVerticalAlignment = .center
-//
-//                button.layer.cornerRadius = 2
-//                button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-//                       button.tag = index
-//                       return button
-//                   }()
-//
-//
-//               }
-        
-        
     }
-    
-    
-    @IBAction func buttonAction(sender: UIButton!) {
-        print("Button tapped with tag \(sender.tag)")
-    }
-    
     
     @objc func changerImage() {
-        
         if counter < imgArray.count {
             let index  = IndexPath.init(item: counter, section: 0)
             self.CollectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true )
@@ -88,116 +47,53 @@ class ViewController: UIViewController  , UICollectionViewDelegate , UICollectio
         
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         if(collectionView == CollectionView ){
-           return imgArray.count
-          }
+            return imgArray.count
+        }
         return myButtonsArray.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = CollectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        if(collectionView == CollectionView ){
+            if(collectionView == CollectionView ){
                 if let vc = cell.viewWithTag(111) as? UIImageView {
                     vc.image = imgArray[indexPath.row]
                 }
-        }
-        if(collectionView == CollectionButton ){
-            let cell2 = CollectionButton.dequeueReusableCell(withReuseIdentifier: "ButtonCell", for: indexPath) as! CollectionViewButtonCell
-            cell2.label1.text = myButtonsArray[indexPath.row]
-            return cell2
-        }
+            }
+            if(collectionView == CollectionButton ){
+                let cell2 = CollectionButton.dequeueReusableCell(withReuseIdentifier: "ButtonCell", for: indexPath) as! CollectionViewButtonCell
+                cell2.label1.text = myButtonsArray[indexPath.item]
+                return cell2
+            }
         return cell
         
-////        if(collectionView == CollectionView ){
-////            if let vc = cell.viewWithTag(111) as? UIImageView {
-////                vc.image = imgArray[indexPath.row]
-////            }
-////
-////        }
-//        if(collectionView == CollectionButton){
-//            let cell2 = CollectionButton.dequeueReusableCell(withReuseIdentifier: "ButtonCell", for: indexPath) as! CollectionViewButtonCell
-//
-//            cell2.label1.text = myButtonsArray[indexPath.count]
-//            return cell2
-//
-//        }
-//        return cell
-
     }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            if(collectionView == CollectionView ){
-                let size = CollectionView.frame.size
-                
-                return CGSize(width: size.width , height: size.height)
-                
-            }
-         //   let size2 = CollectionButton.frame.size
-            let size = CGSize(width: 100, height: 50)
-            return size
-            
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 0.0
-            
-        }
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 0.0
-        }
-        
-        
-        
-//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        }
     
-//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//            if(collectionView ==  CollectionView ){
-//                let size = CollectionView.frame.size
-//
-//                return CGSize(width: size.width, height: size.height)
-//            }else{
-//
-//
-//                return CGSize(width: 80 , height: 40)
-//
-//
-//            }
-//
-////            }
-////            if(collectionView == CollectionButton ){
-////                let size = CollectionButton.frame.size
-////                return CGSize(width: size.width, height: size.height)
-////            }
-////
-////
-//
-//
-//      }
-//
-//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//            return 0.0
-//        }
-//
-//        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//            return 0.0
-//        }
-//
-//
-//
-       }
-//
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if(collectionView == CollectionView ){
+            let size = CollectionView.frame.size
+            return CGSize(width: size.width , height: size.height)
+        }
+        //let size = CollectionView.frame.size
+        
+        return CGSize(width: 100, height:  40 )
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+}
 
 
-                        
+
+
